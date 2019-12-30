@@ -2,15 +2,11 @@ package hu.idomsoft.szemelyszerviz.verification;
 
 import hu.idomsoft.szemelyszerviz.config.HelperConfig;
 import hu.idomsoft.szemelyszerviz.kodszotar.AllampolgKonyvtar;
-import hu.idomsoft.szemelyszerviz.models.SzemelyDTO;
 import lombok.Getter;
 import lombok.extern.java.Log;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @Getter
@@ -26,53 +22,11 @@ public class SzemelyEllenorzes {
     }
 
     /**
-     * Ellenőrzi a személy okmányt és visszaadja a hibalistát
-     * @param szemely Személy, amit meg kell találni
-     * @return
-     */
-    public List<String> ellenoriz(SzemelyDTO szemely) {
-
-        List<String> hibaLista = new ArrayList<>();
-
-        if (!nevEllenoriz(szemely.getANev())) {
-            hibaLista.add(String.format("A megadott anyja neve nem felel meg a név kritériumainak: %s", szemely.getANev()));
-        }
-
-        if (!nevEllenoriz(szemely.getSzulNev())) {
-            hibaLista.add(String.format("A megadott születési név nem felel meg a név kritériumainak: %s", szemely.getSzulNev()));
-        }
-
-        if (!nevEllenoriz(szemely.getVisNev())) {
-            hibaLista.add(String.format("A megadott viselt név nem felel meg a név kritériumainak: %s", szemely.getVisNev()));
-        }
-
-        if (!szemely.getNeme().equalsIgnoreCase("F") && !szemely.getNeme().equalsIgnoreCase("N")) {
-            hibaLista.add("A nem csak F vagy N lehet");
-        }
-
-        if (szemely.getAllampKod().length() != 3) {
-            hibaLista.add("Az állampolgárság kód 3 karakteres lehet.");
-        }
-
-        if (!allampolgKonyvtar.getAllampolgMap().containsKey(szemely.getAllampKod())) {
-            hibaLista.add("Az állampolgárság kód nem szerepel a listában.");
-        }
-        else {
-            final String allampolgDekod = allampolgKonyvtar.getAllampolgMap().get(szemely.getAllampKod());
-        }
-
-
-
-        return hibaLista;
-    }
-
-
-    /**
      * Ellenőrzi a megadott szöveget, mint név
      * @param nev Ellenőrzendő név
      * @return
      */
-    private boolean nevEllenoriz(@NotNull String nev) {
+    public boolean nevEllenoriz(@NotNull String nev) {
         log.fine(String.format("Név ellenőrzése: %s", nev));
 
         // Név max hossz ellenőrzés
