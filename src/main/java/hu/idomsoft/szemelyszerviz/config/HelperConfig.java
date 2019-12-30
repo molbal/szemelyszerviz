@@ -16,4 +16,10 @@ public class HelperConfig {
 
     @Value("${okmanyszerviz.wsroot:http://127.0.0.1:8001/}")
     private String okmanySzervizRoot;
+
+    @Value("${nev.maxhossz}")
+    private int nevMaxHossz;
+
+    @Value("${nev.karakterek}")
+    private String nevKarakter;
 }

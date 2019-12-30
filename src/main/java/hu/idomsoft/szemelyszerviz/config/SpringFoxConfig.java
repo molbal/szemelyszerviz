@@ -1,5 +1,6 @@
 package hu.idomsoft.szemelyszerviz.config;
 
+import hu.idomsoft.szemelyszerviz.rest.SzemelyREST;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
@@ -19,7 +20,7 @@ public class SpringFoxConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                //.apis(RequestHandlerSelectors.basePackage(OkmanyREST.class.getPackageName()))
+                .apis(RequestHandlerSelectors.basePackage(SzemelyREST.class.getPackageName()))
                 .paths(PathSelectors.any())
                 .build()
                 .useDefaultResponseMessages(false)
