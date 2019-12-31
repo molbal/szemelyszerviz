@@ -62,7 +62,8 @@ public class OkmanyClient {
             case 200:
                 return mapper.readValue(responseContent, OkmanyDTO.class);
 
-            case 400:
+            //case 400:
+            case 404:
                 ValidacioHiba hibaLista = mapper.readValue(responseContent, ValidacioHiba.class);
                 throw new ValidacioException(hibaLista.getHibaLista());
 

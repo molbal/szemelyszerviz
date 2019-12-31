@@ -50,6 +50,7 @@ public class SzemelyEllenorzes {
         }
 
         // Dr. nélkül névrészek számának ellenőrzése
+        // TODO: Aposztrof karakterek regex-be kiszervezése
         String nevDrNelkul = nev.replaceAll("Dr\\.?", "").trim();
         if (nevDrNelkul.split("\\s+").length < 2) {
             log.info("Nincs elég szórész.");
@@ -67,6 +68,7 @@ public class SzemelyEllenorzes {
      * @return igaz, ha csak a megadott karaktereket tartalmazza
      */
     private boolean abcEllenorzes(String str) {
+        str = str.replaceAll("'","").replaceAll("\"","");
         return !str.equals("") && str.matches(config.getNevKarakter());
     }
 
